@@ -6,7 +6,7 @@
 
 class DynFibonacci {
     size_t *cache;
-    int cached;
+    mutable int cached;
 
 public:
     // TODO: 实现动态设置容量的构造器
