@@ -1,37 +1,27 @@
 ﻿#include "../exercise.h"
-#include <map>
+#include <algorithm>
+#include <string>
+#include <vector>
 
-// READ: `std::map` <https://zh.cppreference.com/w/cpp/container/map>
-// READ: `std::unordered_map` <https://zh.cppreference.com/w/cpp/container/unordered_map>
+// READ: `std::transform` <https://zh.cppreference.com/w/cpp/algorithm/transform>
+// READ: `std::vector::begin` <https://zh.cppreference.com/w/cpp/container/vector/begin>
+using namespace std;
 
-template<class k, class v>
-bool key_exists(std::map<k, v> const &map, k const &key) {
-    // TODO: 实现函数
-}
-
-template<class k, class v>
-void set(std::map<k, v> &map, k key, v value) {
-    // TODO: 实现函数
-}
-
-// ---- 不要修改以下代码 ----
 int main(int argc, char **argv) {
-    using namespace std::string_literals;
+    std::vector<int> val{8, 13, 21, 34, 55};
+    // TODO: 调用 `std::transform`，将 `v` 中的每个元素乘以 2，并转换为字符串，存入 `ans`
+    std::vector<std::string> ans(val.size());
 
-    std::map<std::string, std::string> secrets;
+    transform(val.begin(),val.end(),ans.begin(),[](int x){
+        return to_string(x * 2);
+    });
 
-    set(secrets, "hello"s, "world"s);
-    ASSERT(key_exists(secrets, "hello"s), "\"hello\" shoud be in `secrets`");
-    ASSERT(!key_exists(secrets, "foo"s), "\"foo\" shoud not be in `secrets`");
 
-    set(secrets, "foo"s, "bar"s);
-    set(secrets, "Infini"s, "Tensor"s);
-    ASSERT(secrets["hello"] == "world", "hello -> world");
-    ASSERT(secrets["foo"] == "bar", "foo -> bar");
-    ASSERT(secrets["Infini"] == "Tensor", "Infini -> Tensor");
-
-    set(secrets, "hello"s, "developer"s);
-    ASSERT(secrets["hello"] == "developer", "hello -> developer");
-
+    ASSERT(ans.size() == val.size(), "ans size should be equal to val size");
+    ASSERT(ans[0] == "16", "ans[0] should be 16");
+    ASSERT(ans[1] == "26", "ans[1] should be 26");
+    ASSERT(ans[2] == "42", "ans[2] should be 42");
+    ASSERT(ans[3] == "68", "ans[3] should be 68");
+    ASSERT(ans[4] == "110", "ans[4] should be 110");
     return 0;
 }
